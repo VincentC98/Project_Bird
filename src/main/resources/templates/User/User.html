@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <link th:href="@{/css/main.css}" rel="stylesheet" />
+</head>
+<body>
+<!--HEADER-->
+<div th:replace="fragments/header::top-nav"></div>
+<table class="table table-hover">
+  <thead class="text-warning">
+  <th>Nom</th>
+  <th>Prenom(s)</th>
+  <th>Email</th>
+  </thead>
+  <tbody>
+  <tr th:object="${User}">
+    <td th:text="*{firstName}"></td>
+    <td th:text="*{lastName}"></td>
+    <td th:text="*{emailAddress}"></td>
+    <td th:text="*{points}"></td>
+    <td><div th:each="birdPercentage:${userService.getPercentageOfObservedBird(User.getId())}">
+      <p> the percentage of <span th:text="${birdPercentage.getKey()}"></span> is <span th:text="${birdPercentage.getValue()}"></span></p>
+    </div></td>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<!--FOOTER-->
+<footer th:replace="fragments/footer::footer"></footer>
+</body>
+</html>

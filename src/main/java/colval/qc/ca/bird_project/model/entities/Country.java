@@ -15,7 +15,7 @@ public class Country {
     @Id
     @Column(name = "country_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer CountryId;
+    private int CountryId;
     @Column(name = "name")
     @NonNull
     private String Name;
@@ -24,6 +24,14 @@ public class Country {
     private String SubName;
     @OneToMany(mappedBy = "country", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Region> regions;
+
+    public String getSubName() {
+        return SubName;
+    }
+
+    public void setSubName(String subName) {
+        SubName = subName;
+    }
 
     public int getCountryId() {
         return CountryId;

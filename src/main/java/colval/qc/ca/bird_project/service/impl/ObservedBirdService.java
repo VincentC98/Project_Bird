@@ -28,11 +28,11 @@ public class ObservedBirdService implements IObservedBirdService {
 
     @Override
     public List<ObservedBird> readAll() {
-        return null;
+        return this.observedBirdRepository.findAll();
     }
 
     @Override
     public void delete(int Id) {
-
+        this.observedBirdRepository.deleteById(Id);
     }
 }

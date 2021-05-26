@@ -4,6 +4,7 @@ import colval.qc.ca.bird_project.model.entities.Country;
 
 import colval.qc.ca.bird_project.model.entities.Region;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface IRegionService {
@@ -14,4 +15,8 @@ public interface IRegionService {
     List<Region> readAll();
 
     void delete(int Id);
+
+    Map<String, Integer> GetBirdsCountInSpecificRegion(int regionId);
+
+    Map<String, Integer> GetBirdsCountInSpecificRegion(Region region);
 }

@@ -13,5 +13,13 @@ public interface IPostService {
 
     List<Post> readAll();
 
+    void update(int id, Post post);
+
     void delete(int Id);
+
+    double gePostRateAverage(int id);
+
+    double gePostRateAverage(Post post);
+
+    int getTotalOfPost();
 }

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/css/main.css}" rel="stylesheet" />
+</head>
+<body>
+<!--HEADER-->
+<div th:replace="fragments/header::top-nav"></div>
+<a th:href="${'/post/add'}">add post</a>
+<div th:each="post:${posts}">
+    <H1 th:text="*{post.title}"></H1>
+    <div>
+        <img src="{{post.picture}}">
+    </div>
+    <div th:object="${user}">
+        <H2>this is a test</H2>
+        <p th:text="${post.description}"></p>
+        <p th:text="${postService.gePostRateAverage(post.getPostId())}"></p>
+        <div th:if="${post.user.userName == username}">
+            <a th:href="${'/post/update/'+post.postId}">update post</a>
+            <a th:href="${'/post/delete/'+post.postId}">delete post</a>
+        </div>
+        <a th:href="${'/post/addRating/'+post.postId}">add rate</a>
+    </div>
+</div>
+<!--FOOTER-->
+<footer th:replace="fragments/footer::footer"></footer>
+</body>
+</html>

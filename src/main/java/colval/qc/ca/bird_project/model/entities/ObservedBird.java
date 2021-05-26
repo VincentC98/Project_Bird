@@ -20,9 +20,9 @@ public class ObservedBird {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "region_id", referencedColumnName = "region_id")
     private Region region;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    /*@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "post_id", referencedColumnName = "post_id")
-    private Post post;
+    private Post post;*/
 
     public int getBirdId() {
         return BirdId;
@@ -48,21 +48,19 @@ public class ObservedBird {
         this.region = region;
     }
 
-    public Post getPost() {
+    /*public Post getPost() {
         return post;
     }
 
     public void setPost(Post post) {
         this.post = post;
-    }
+    }*/
 
     @Override
     public String toString() {
         return "ObservedBird{" +
                 "BirdId=" + BirdId +
                 ", Name='" + Name + '\'' +
-                ", region=" + region +
-                ", post=" + post +
-                '}';
+                ", region=" + region ;
     }
 }

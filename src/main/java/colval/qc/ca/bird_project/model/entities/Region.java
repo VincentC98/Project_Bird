@@ -15,7 +15,7 @@ public class Region {
     @Id
     @Column(name = "region_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer RegionId;
+    private int RegionId;
     @Column(name = "name")
     @NonNull
     private String Name;
@@ -29,6 +29,14 @@ public class Region {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "country_id", referencedColumnName = "country_id")
     private Country country;
+
+    public String getSubName() {
+        return SubName;
+    }
+
+    public void setSubName(String subName) {
+        SubName = subName;
+    }
 
     public int getRegionId() {
         return RegionId;

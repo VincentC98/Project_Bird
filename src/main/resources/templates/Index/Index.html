@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/css/main.css}" rel="stylesheet" />
+</head>
+<body>
+    <!--HEADER-->
+    <div th:replace="fragments/header::top-nav"></div>
+    <H1>Welcome to project bird</H1>
+    <!--FOOTER-->
+    <footer th:replace="fragments/footer::footer"></footer>
+</body>
+</html>

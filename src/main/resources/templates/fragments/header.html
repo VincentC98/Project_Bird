@@ -1,0 +1,42 @@
+
+
+<div th:fragment="top-nav">
+    <ul class="nav">
+        <li class="nav-item active  ">
+            <a class="nav-link" th:href="@{/}">
+
+                Tableau de bord
+            </a>
+        </li>
+        <li class="nav-item active  ">
+            <a class="nav-link" th:href="@{/post}">
+                posts
+            </a>
+        </li>
+        <li class="nav-item active  ">
+            <a class="nav-link" th:href="@{/User/6}">
+                User
+            </a>
+        </li>
+        <li class="nav-item active  ">
+            <a class="nav-link" th:href="@{/Region}">
+                Regions
+            </a>
+        </li>
+        <li class="nav-item active  ">
+            <a class="nav-link" th:href="@{/User/update}">
+                update account
+            </a>
+        </li>
+        <li class="nav-item active  ">
+            <a class="nav-link" th:href="@{/observedBird}">
+                show list of observed birds
+            </a>
+        </li>
+        <li class="nav-item active  ">
+            <a class="nav-link" th:href="@{/logout}">
+                Logout
+            </a>
+        </li>
+    </ul>
+</div>

@@ -9,6 +9,11 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
+
+@NamedQueries({
+        @NamedQuery(name = "User.findByUserName", query = "SELECT u FROM User u where u.UserName = :username"),
+        @NamedQuery(name = "User.findById", query = "SELECT u FROM User u where u.UserId = :id")
+        })
 @NoArgsConstructor
 @AllArgsConstructor
 @RequiredArgsConstructor
@@ -26,6 +31,12 @@ public class User {
     @Column(name = "LastName")
     @NonNull
     private String LastName;
+    @Column(name = "UserName")
+    @NonNull
+    private String UserName;
+    @Column(name = "Password")
+    @NonNull
+    private String Password;
     @Column(name = "Gender")
     @NonNull
     private String Gender;
@@ -38,11 +49,29 @@ public class User {
     @Column(name = "Phone")
     @NonNull
     private String Phone;
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @Column(name = "Points")
+    private int points;
+    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Post> posts;
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", referencedColumnName = "address_id")
     private Address address;
+
+    public String getUserName() {
+        return UserName;
+    }
+
+    public void setUserName(String userName) {
+        UserName = userName;
+    }
+
+    public String getPassword() {
+        return Password;
+    }
+
+    public void setPassword(String password) {
+        Password = password;
+    }
 
     public int getId() {
         return this.UserId;
@@ -106,6 +135,22 @@ public class User {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
 
     @Override

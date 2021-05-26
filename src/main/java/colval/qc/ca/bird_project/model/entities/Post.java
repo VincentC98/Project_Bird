@@ -5,11 +5,16 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "Post")
+@NamedQueries({
+        @NamedQuery(name = "Post.findByCustomerId", query = "SELECT p FROM Post p WHERE p.PostId = :postId")
+
+})
 public class Post {
     @Id
     @Column(name = "post_id")
@@ -23,9 +28,9 @@ public class Post {
     private Date PublishDate;
     @Column(name = "picture")
     private String Picture;
-    @Column(name = "rate")
-    private int Rate;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "post", fetch = FetchType.LAZY)
+    private List<Rate> Rates;
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "bird_id", referencedColumnName = "bird_id")
     private ObservedBird bird;
     @ManyToOne(fetch = FetchType.EAGER)
@@ -72,12 +77,12 @@ public class Post {
         Picture = picture;
     }
 
-    public int getRate() {
-        return Rate;
+    public List<Rate> getRate() {
+        return Rates;
     }
 
-    public void setRate(int rate) {
-        Rate = rate;
+    public void setRate(List<Rate> rate) {
+        Rates = rate;
     }
 
     public ObservedBird getBird() {
@@ -96,6 +101,7 @@ public class Post {
         this.user = user;
     }
 
+
     @Override
     public String toString() {
         return "Post{" +
@@ -103,7 +109,6 @@ public class Post {
                 ", Title='" + Title + '\'' +
                 ", Description='" + Description + '\'' +
                 ", PublishDate=" + PublishDate +
-                ", Picture='" + Picture + '\'' +
-                ", Rate=" + Rate ;
+                ", Picture='" + Picture + '\'' ;
     }
 }

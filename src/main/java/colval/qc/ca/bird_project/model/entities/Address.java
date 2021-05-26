@@ -18,9 +18,6 @@ public class Address {
     private String Name;
     @Column(name = "postal_code")
     private String postal_code;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
-    private User user;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "region_id", referencedColumnName = "region_id")
     private Region region;
@@ -49,14 +46,6 @@ public class Address {
         this.postal_code = postal_code;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public Region getRegion() {
         return region;
     }
@@ -70,9 +59,6 @@ public class Address {
         return "Address{" +
                 "AddressId=" + AddressId +
                 ", Name='" + Name + '\'' +
-                ", postal_code='" + postal_code + '\'' +
-                ", user=" + user +
-                ", region=" + region +
-                '}';
+                ", postal_code='" + postal_code + '\'' ;
     }
 }

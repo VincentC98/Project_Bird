@@ -38,25 +38,29 @@ public class BirdProjectApplication {
         SpringApplication.run(BirdProjectApplication.class, args);
     }
 
-    @Bean
+    /*@Bean
     void showPosts(){
         List<Post> posts = postService.readAll();
         for (Post post: posts
              ) {
             log.info("this is a post {}", post);
         }
-    }
-   /* @Bean
+    }*/
+    @Bean
     void createPost(){
-        Region region = regionService.readOne(381).get();
+        /*postService.delete(7);
+        postService.delete(8);
+        observedBirdService.delete(10);
+        observedBirdService.delete(11);*/
+
+
+        /*Region region = regionService.readOne(381).get();
         User user = userService.readOne(6).get();
         Post post = new Post(1, "This is a Cardinal", "Lorem Ipum", new Date(2021, 04, 11)
-                , "C:\\Users\\Utilisateur\\Desktop\\Collégial Hiver 2021\\Développement d'application web transactionelles\\Exercices\\bird_project\\src\\main\\resources\\static\\Img", 5, new ObservedBird(), user);
-        ObservedBird observedBird = new ObservedBird(1, "Cardinal", region, post);
+                , "C:\\Users\\Utilisateur\\Desktop\\Collégial Hiver 2021\\Développement d'application web transactionelles\\Exercices\\bird_project\\src\\main\\resources\\static\\Img", 5, new ObservedBird(1, "Cardinal", region), user);
 
-        postService.create(post);
-        observedBirdService.create(observedBird);
-    }*/
+        postService.create(post);*/
+    }
 
     /*@Bean
     void createCountryAndRegion(){

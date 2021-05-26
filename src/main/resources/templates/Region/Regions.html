@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/css/main.css}" rel="stylesheet" />
+</head>
+<body>
+<!--HEADER-->
+<div th:replace="fragments/header::top-nav"></div>
+<div th:each="region:${regions}">
+    <H1 th:text="*{region.name}"></H1>
+    <div th:each="birdCount:${regionService.GetBirdsCountInSpecificRegion(region.regionId)}">
+        <p> the number of <span th:text="${birdCount.getKey()}"></span> is <span th:text="${birdCount.value}"></span></p>
+    </div>
+</div>
+<!--FOOTER-->
+<footer th:replace="fragments/footer::footer"></footer>
+</body>
+</html>
