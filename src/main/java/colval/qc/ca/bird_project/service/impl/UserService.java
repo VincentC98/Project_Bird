@@ -5,6 +5,7 @@ import colval.qc.ca.bird_project.model.entities.User;
 import colval.qc.ca.bird_project.repositories.UserRepository;
 import colval.qc.ca.bird_project.service.interfaces.IUserService;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -161,6 +162,7 @@ public class UserService implements IUserService, UserDetailsService {
         boolean credentialsNonExpired = true;
         boolean accountNonLocked = true;
 
-        return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(), new ArrayList<GrantedAuthority>());
+        UserDetails userDetails = org.springframework.security.core.userdetails.User.withUsername(user.getUserName()).password(user.getPassword()).authorities("USER").build();
+        return  userDetails;
     }
 }

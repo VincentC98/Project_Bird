@@ -20,6 +20,14 @@ public class Rate {
     @JoinColumn(name = "post_id", referencedColumnName = "post_id")
     private Post post;
 
+    public int getRateId() {
+        return rateId;
+    }
+
+    public void setRateId(int rateId) {
+        this.rateId = rateId;
+    }
+
     public int getPostId() {
         return rateId;
     }

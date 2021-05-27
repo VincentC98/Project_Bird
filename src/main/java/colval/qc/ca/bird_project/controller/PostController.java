@@ -3,14 +3,19 @@ package colval.qc.ca.bird_project.controller;
 import colval.qc.ca.bird_project.model.DTO.PostDTO;
 import colval.qc.ca.bird_project.model.entities.*;
 import colval.qc.ca.bird_project.service.impl.*;
+import colval.qc.ca.bird_project.util.FileUnploadUtil;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.io.File;
+import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -32,13 +37,6 @@ public class PostController {
 
     @GetMapping
     public String getAll(Model model, Principal principal){
-        //System.out.println(principal.getName());
-
-        /*for (Post post : this.postService.readAll()){
-            System.out.println(post);
-            System.out.println(post.getUser());
-        }
-        System.out.println(this.userService.getUserByUserName(principal.getName()));*/
         model.addAttribute("posts", this.postService.readAll());
         model.addAttribute("postService", this.postService);
         model.addAttribute("user", this.userService.getUserByUserName(principal.getName()));
@@ -59,7 +57,7 @@ public class PostController {
     }
 
     @PostMapping("/save/{username}")
-    public String savePost(@Valid PostDTO postDTO, @PathVariable String username){
+    public String savePost(@Valid PostDTO postDTO, @PathVariable String username, @RequestParam("image") MultipartFile multipartFile) throws IOException {
         System.out.println(username);
         Post post = new Post();
         Region region = regionService.readOne(postDTO.getRegionId()).get();
@@ -70,7 +68,10 @@ public class PostController {
         post.setTitle(postDTO.getTitle());
         post.setDescription(postDTO.getDescription());
         post.setPublishDate(new Date());
-        post.setPicture(postDTO.getPicture());
+
+        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+
+        post.setPicture(fileName);
         post.setRate(new ArrayList<Rate>());
         post.setUser(user);
         post.setBird(observedBird);
@@ -78,12 +79,23 @@ public class PostController {
 
         postService.create(post);
 
+        String unploadDir = "img/";
+
+        FileUnploadUtil.saveFile(unploadDir, fileName, multipartFile);
+
         return "redirect:/post";
     }
 
     @GetMapping("/delete/{id}")
     public String DeletePost(@PathVariable int id){
-        this.postService.delete(id);
+        Post post = this.postService.readOne(id).get();
+        for (Rate rate: post.getRate()){
+            this.rateService.delete(rate.getRateId());
+        }
+        if (this.postService.readOne(id).isPresent()){
+            this.postService.delete(id);
+        }
+
         return "redirect:/post";
     }
 

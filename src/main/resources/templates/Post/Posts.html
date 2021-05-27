@@ -13,17 +13,17 @@
 <div th:each="post:${posts}">
     <H1 th:text="*{post.title}"></H1>
     <div>
-        <img src="{{post.picture}}">
+        <img th:src="@{${post.getPhotosImagePath()}}">
     </div>
     <div th:object="${user}">
-        <H2>this is a test</H2>
+        <H2>Some details</H2>
         <p th:text="${post.description}"></p>
         <p th:text="${postService.gePostRateAverage(post.getPostId())}"></p>
         <div th:if="${post.user.userName == username}">
             <a th:href="${'/post/update/'+post.postId}">update post</a>
             <a th:href="${'/post/delete/'+post.postId}">delete post</a>
         </div>
-        <a th:href="${'/post/addRating/'+post.postId}">add rate</a>
+        <a th:if="${post.user.userName != username}" th:href="${'/post/addRating/'+post.postId}">add rate</a>
     </div>
 </div>
 <!--FOOTER-->

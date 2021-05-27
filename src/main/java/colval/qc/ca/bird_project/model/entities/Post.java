@@ -101,6 +101,12 @@ public class Post {
         this.user = user;
     }
 
+    @Transient
+    public String getPhotosImagePath() {
+
+        return "/img/" + getPicture();
+    }
+
 
     @Override
     public String toString() {
