@@ -26,13 +26,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                //.antMatchers("/assets/**").permitAll()
-                //.antMatchers("/api/**").permitAll()// permet ces requête
                 .antMatchers("/User/Create").permitAll()//accès au bloc customer
                 .antMatchers("/User/save").permitAll()
                 .antMatchers("/").permitAll()
                 .antMatchers("/css/main.css").permitAll()
-                //.antMatchers("/assetslogin/**").permitAll()
                 .anyRequest().authenticated()// pour toute autre requetes: doit être authentifié .authenticated
                 .and() //fin de la configuration des ressources
                 .formLogin() //connexion via un formulaire
@@ -42,26 +39,18 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .permitAll();
 
-                //.and()
-                //.exceptionHandling().accessDeniedHandler(accessDeniedHandler);
     }
 
+    //encryption du mots de passe
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-
+    //authentification de l'utilisateur
     @Autowired
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
-        //auth.userDetailsService(userService).passwordEncoder();
-        /*List<User> users = this.userService.readAll();
-        for (User user : users){
-            System.out.println(user);
-            auth.inMemoryAuthentication()
-                    .withUser(user.getUserName()).roles("USER").password("{noop}" + user.getPassword());
-        }*/
     }
 }
 

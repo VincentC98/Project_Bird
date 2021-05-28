@@ -9,6 +9,9 @@ import java.nio.file.Paths;
 
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
+
+    //cette configuration spécifie à l'application web vers ou il doit aller chercher les images ajoutées par le post créé
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         exposeDirectory("img", registry);

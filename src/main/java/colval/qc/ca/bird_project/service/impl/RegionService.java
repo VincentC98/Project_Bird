@@ -41,6 +41,7 @@ public class RegionService implements IRegionService {
         this.regionRepository.deleteById(Id);
     }
 
+    //retourn le nombre d'un espèce d'oiseau dans une région spécifique
     @Override
     public Map<String, Integer> GetBirdsCountInSpecificRegion(int regionId) {
         Optional<Region> region = this.regionRepository.findById(regionId);
@@ -60,6 +61,7 @@ public class RegionService implements IRegionService {
         return birdCount;
     }
 
+    //même chose pour l'autre. test unitaire.
     @Override
     public Map<String, Integer> GetBirdsCountInSpecificRegion(Region region) {
         Map<String, Integer> birdCount = new HashMap<String, Integer>();
@@ -74,6 +76,7 @@ public class RegionService implements IRegionService {
         return birdCount;
     }
 
+    //trie le dictionnaire selon le nombre d'espèce d'oiseau
     private Map<String, Integer> sortBirdCount(Map<String, Integer> birdCount) {
         List<Map.Entry<String, Integer>> birdCountList = new LinkedList<>(birdCount.entrySet());
 
@@ -82,6 +85,7 @@ public class RegionService implements IRegionService {
         return birdCount;
     }
 
+    //ajoute le nombre d'espèce d'oiseau dans le dictionnaire avec le région spécifié
     private Map<String, Integer> addCounts(Map<String, Integer> birdCount, List<ObservedBird> observedBirds) {Map<String, Double> birdPercentages = new HashMap<String, Double>();
         int countSpecificBird = 0;
 
@@ -102,6 +106,7 @@ public class RegionService implements IRegionService {
         return birdCount;
     }
 
+    //construit le dictionnaire
     private Map<String, Integer> fillMap(Map<String, Integer> birdCount, List<ObservedBird> observedBirds) {
         boolean isFoundBird = false;
         boolean nobirdCountAdded = true;

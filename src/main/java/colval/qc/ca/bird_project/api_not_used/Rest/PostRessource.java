@@ -1,4 +1,4 @@
-package colval.qc.ca.bird_project.api.Rest;
+package colval.qc.ca.bird_project.api_not_used.Rest;
 
 import colval.qc.ca.bird_project.model.DTO.PostDTO;
 import colval.qc.ca.bird_project.model.entities.Post;

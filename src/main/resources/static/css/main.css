@@ -12,6 +12,25 @@
     padding: 6px 24px;
     text-decoration: none;
     text-shadow: 0px 1px 0px #528ecc;
+    margin-top: 10px;
+}
+
+.btnAddPost {
+    box-shadow: inset 0px 1px 0px 0px #dcecfb;
+    background: #bddbfa linear-gradient(to bottom, #bddbfa 5%, #80b5ea 100%);
+    border-radius: 6px;
+    border: 1px solid #84bbf3;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 6px 24px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #528ecc;
+    margin-top: 10px;
+    margin-left: 10px;
 }
 
 .btn:hover {
@@ -29,6 +48,10 @@ table, th, td {
 
 tr:hover {
     background-color: #ffff99;
+}
+
+.Intro {
+    text-align: center;
 }
 
 tr:nth-child(even) {
@@ -127,6 +150,18 @@ li a:hover {
 .form-control
 {
 
+}
+
+.login {
+    margin: auto;
+    width: 50%;
+    border: 3px solid black;
+    padding: 10px;
+}
+
+.margin {
+    margin-top: 10px;
+    margin-left: 10px;
 }
 
 

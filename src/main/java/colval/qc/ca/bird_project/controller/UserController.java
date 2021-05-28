@@ -31,6 +31,7 @@ public class UserController {
         this.userMapper = userMapper;
     }
 
+    //page de l'utilisateur connecté avec les points et le pourcentage d'oiseaux observé
     @GetMapping
     public String getUser(Model model, Principal principal){
         model.addAttribute("User", this.userService.getUserByUserName(principal.getName()).get());
@@ -39,6 +40,7 @@ public class UserController {
         return "User/User";
     }
 
+    //page de la création d'utilisation (sign up)
     @GetMapping("/Create")
     public String createUser(Model model){
         model.addAttribute("User", new UserDTO());
@@ -47,6 +49,7 @@ public class UserController {
         return "login/SignIn";
     }
 
+    //page de la modification de l'utilisateur connecté
     @GetMapping("/update")
     public String updateUser(Model model, Principal principal){
         User user = this.userService.getUserByUserName(principal.getName()).get();
@@ -56,6 +59,7 @@ public class UserController {
         return "User/updateUser";
     }
 
+    //traitement de sauvegarde de l'utilisateur créé ou modifié
     @PostMapping("/save")
     public String createUser(@ModelAttribute("User") UserDTO userDto){
         System.out.println("user Creation");

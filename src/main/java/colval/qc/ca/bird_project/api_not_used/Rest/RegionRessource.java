@@ -1,8 +1,6 @@
-package colval.qc.ca.bird_project.api.Rest;
+package colval.qc.ca.bird_project.api_not_used.Rest;
 
-import colval.qc.ca.bird_project.model.DTO.PostDTO;
 import colval.qc.ca.bird_project.model.DTO.RegionDTO;
-import colval.qc.ca.bird_project.model.entities.Post;
 import colval.qc.ca.bird_project.model.entities.Region;
 import colval.qc.ca.bird_project.service.impl.RegionService;
 import colval.qc.ca.bird_project.service.mapper.RegionMapper;
@@ -10,8 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Optional;

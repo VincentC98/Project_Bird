@@ -36,6 +36,7 @@ public class RateService implements IRateService {
         this.rateRepository.deleteById(Id);
     }
 
+    //alocation de point selon le cote du post
     @Override
     public int addPoint(double rate) {
         int points = 0;

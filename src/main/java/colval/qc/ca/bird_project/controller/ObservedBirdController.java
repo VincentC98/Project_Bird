@@ -17,6 +17,7 @@ public class ObservedBirdController {
         this.observedBirdService = observedBirdService;
     }
 
+    //page de la liste d'oiseaus observés
     @GetMapping
     public String getAll(Model model, Principal principal){
         model.addAttribute("birds", this.observedBirdService.readAll());

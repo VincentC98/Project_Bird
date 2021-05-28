@@ -66,6 +66,7 @@ public class UserService implements IUserService, UserDetailsService {
         userRepository.deleteById(Id);
     }
 
+    //modifie le nombre total de point selon un utilisateur
     @Override
     public void updatePoints(int userId, int points) {
         User user = this.userRepository.getOne(userId);
@@ -75,11 +76,13 @@ public class UserService implements IUserService, UserDetailsService {
         userRepository.save(user);
     }
 
+    //getUserByUserName
     @Override
     public Optional<User> getUserByUserName(String username) {
         return this.userRepository.findByUserName(username);
     }
 
+    //retourne le pourcentage d'un espèce d'oiseau observé par un utilisateur selon le nombre total d'oiseau qu'il a observé
     @Override
     public Map<String, Double> getPercentageOfObservedBird(int Id) {
         Map<String, Double> birdPercentages;
@@ -92,6 +95,7 @@ public class UserService implements IUserService, UserDetailsService {
         return birdPercentages;
     }
 
+    //test unitaire
     @Override
     public Map<String, Double> getPercentageOfObservedBird(User user) {
         Map<String, Double> birdPercentages;
@@ -104,6 +108,7 @@ public class UserService implements IUserService, UserDetailsService {
         return birdPercentages;
     }
 
+    //construit le dictionnaire (key: utilisateur, value: pourcentage d'un espèce d'oiseau)
     private Map<String, Double> fillMap(List<Post> posts){
         Map<String, Double> birdPercentages = new HashMap<String, Double>();
         boolean isFoundBird = false;
@@ -132,6 +137,7 @@ public class UserService implements IUserService, UserDetailsService {
         return birdPercentages;
     }
 
+    //ajoute le pourcentage d'un espèce d'oiseau dans le dictionnaire avec l'utilisateur spécifier
     private Map<String, Double> addPercentages(Map<String, Double> birdPercentages, List<Post> posts){
         int totalOfPost = posts.size();
         int countSpecificBird = 0;
@@ -151,6 +157,7 @@ public class UserService implements IUserService, UserDetailsService {
         return birdPercentages;
     }
 
+    //utilisé pour l'authentification de l'utilisateur durant le runtime de l'application web
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         User user = userRepository.findByUserName(s).get();

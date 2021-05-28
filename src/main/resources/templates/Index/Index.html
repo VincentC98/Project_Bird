@@ -5,11 +5,12 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link th:href="@{/css/main.css}" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 </head>
 <body>
     <!--HEADER-->
     <div th:replace="fragments/header::top-nav"></div>
-    <H1>Welcome to project bird</H1>
+    <H1 class="Intro">Welcome to project bird</H1>
     <!--FOOTER-->
     <footer th:replace="fragments/footer::footer"></footer>
 </body>

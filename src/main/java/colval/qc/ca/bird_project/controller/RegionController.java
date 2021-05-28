@@ -15,6 +15,7 @@ public class RegionController {
         this.regionService = regionService;
     }
 
+    //page de la liste des région avec le nombre d'oiseaux observé dans chaque région
     @GetMapping
     public String getAll(Model model){
         model.addAttribute("regions", this.regionService.readAll());

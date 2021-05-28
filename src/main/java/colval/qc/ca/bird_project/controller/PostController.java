@@ -3,9 +3,8 @@ package colval.qc.ca.bird_project.controller;
 import colval.qc.ca.bird_project.model.DTO.PostDTO;
 import colval.qc.ca.bird_project.model.entities.*;
 import colval.qc.ca.bird_project.service.impl.*;
+import colval.qc.ca.bird_project.service.mapper.PostMapper;
 import colval.qc.ca.bird_project.util.FileUnploadUtil;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -14,7 +13,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
-import java.io.File;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
@@ -27,14 +25,18 @@ public class PostController {
     private final RegionService regionService;
     private final UserService userService;
     private final RateService rateService;
+    private final PostMapper postMapper;
 
-    public PostController(PostService postService, RegionService regionService, UserService userService, RateService rateService) {
+    public PostController(PostService postService, RegionService regionService, UserService userService, RateService rateService, PostMapper postMapper) {
         this.postService = postService;
         this.regionService = regionService;
         this.userService = userService;
         this.rateService = rateService;
+        this.postMapper = postMapper;
     }
 
+
+    //page de la liste des posts créé
     @GetMapping
     public String getAll(Model model, Principal principal){
         model.addAttribute("posts", this.postService.readAll());
@@ -45,6 +47,7 @@ public class PostController {
         return "Post/Posts";
     }
 
+    //page de la création de post
     @GetMapping("/add")
     public ModelAndView addPost(Principal principal) {
         System.out.println(principal.getName());
@@ -56,6 +59,7 @@ public class PostController {
         return modelAndView;
     }
 
+    //traitement de la création de post coté controlleur
     @PostMapping("/save/{username}")
     public String savePost(@Valid PostDTO postDTO, @PathVariable String username, @RequestParam("image") MultipartFile multipartFile) throws IOException {
         System.out.println(username);
@@ -79,13 +83,14 @@ public class PostController {
 
         postService.create(post);
 
+        //permet de créer un répertoire d'image ou d'ajouter l'image dans ce répertoire
         String unploadDir = "img/";
-
         FileUnploadUtil.saveFile(unploadDir, fileName, multipartFile);
 
         return "redirect:/post";
     }
 
+    //traitement de la suppression du post
     @GetMapping("/delete/{id}")
     public String DeletePost(@PathVariable int id){
         Post post = this.postService.readOne(id).get();
@@ -99,23 +104,28 @@ public class PostController {
         return "redirect:/post";
     }
 
+    //page de modification du post choisi
     @GetMapping("/update/{id}")
     public ModelAndView updatePost(@PathVariable int id) {
         ModelAndView modelAndView = new ModelAndView("Post/updatePost");
         Post post = this.postService.readOne(id).get();
-        modelAndView.addObject("post", post);
+        PostDTO postDTO = this.postMapper.entityToDto(post);
+        modelAndView.addObject("post", postDTO);
 
         return modelAndView;
     }
 
+    //traitement de la modification du post choisi
     @PostMapping(value = "/update/{id}")
-    public String savePost(@PathVariable int id, @ModelAttribute("post") Post post){
-        System.out.println("update on controller" + post.getTitle());
+    public String savePost(@PathVariable int id, @ModelAttribute("post") PostDTO postDTO){
+        System.out.println("update on controller" + postDTO.getTitle());
+        Post post = this.postMapper.DtoToEntity(postDTO);
         this.postService.update(id,post);
 
         return "redirect:/post";
     }
 
+    //page d'ajout d'un rating
     @GetMapping("/addRating/{id}")
     public ModelAndView addRating(@PathVariable int id) {
         ModelAndView modelAndView = new ModelAndView("Post/addRating");
@@ -125,6 +135,7 @@ public class PostController {
         return modelAndView;
     }
 
+    //traitement d'ajout d'un rating avec l'ajout de point à l'utilisateur qui se fait donner le rating
     @PostMapping("/addRating/{id}")
     public String addRating(@PathVariable int id, @ModelAttribute("rate") Rate rate){
         Post post = this.postService.readOne(id).get();

@@ -45,11 +45,6 @@ public class PostService implements IPostService {
 
             stored.setTitle(post.getTitle());
             stored.setDescription(post.getDescription());
-            stored.setPicture(post.getPicture());
-            stored.setPublishDate(post.getPublishDate());
-            stored.setRate(post.getRate());
-            stored.setBird(post.getBird());
-            stored.setUser(post.getUser());
 
             postRepository.save(stored);
         }
@@ -60,6 +55,8 @@ public class PostService implements IPostService {
         this.postRepository.deleteById(Id);
     }
 
+
+    //retourne la moyenne des cotes du posts
     @Override
     public double gePostRateAverage(int id) {
         Optional<Post> post = this.postRepository.findById(id);
@@ -78,6 +75,7 @@ public class PostService implements IPostService {
         return  avgRate;
     }
 
+    //même chose pour l'autre. Utilisé comme test unitaire.
     @Override
     public double gePostRateAverage(Post post) {
         double totalRate = 0;

@@ -6,6 +6,8 @@ import java.io.*;
 import java.nio.file.*;
 
 public class FileUnploadUtil {
+
+    //ajout de l'image ajouté par le post au dossier créé ou existant
     public static void saveFile(String uploadDir, String fileName,
                                 MultipartFile multipartFile) throws IOException {
         Path uploadPath = Paths.get(uploadDir);

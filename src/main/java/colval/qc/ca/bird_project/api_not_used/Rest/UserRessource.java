@@ -1,8 +1,6 @@
-package colval.qc.ca.bird_project.api.Rest;
+package colval.qc.ca.bird_project.api_not_used.Rest;
 
-import colval.qc.ca.bird_project.model.DTO.PostDTO;
 import colval.qc.ca.bird_project.model.DTO.UserDTO;
-import colval.qc.ca.bird_project.model.entities.Post;
 import colval.qc.ca.bird_project.model.entities.User;
 import colval.qc.ca.bird_project.service.impl.UserService;
 import colval.qc.ca.bird_project.service.mapper.UserMapper;

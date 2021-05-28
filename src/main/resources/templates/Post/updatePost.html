@@ -5,35 +5,37 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link th:href="@{/css/main.css}" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 </head>
 <body>
 <!--HEADER-->
 <div th:replace="fragments/header::top-nav"></div>
 
-<h1>Modifier un post</h1>
+<div class="margin">
+    <h1>Modifier un post</h1>
 
-<form method="post" th:action="@{/post/update/{id}(id=${post.postId})}" th:object="${post}" action="#">
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <label for="inputTitle">Title</label>
-            <input type="text" class="form-control" th:field="*{title}"
-                   id="inputTitle">
+    <form method="post" th:action="@{/post/update/{id}(id=${post.postId})}" th:object="${post}" action="#">
+        <input type="hidden" th:field="*{userId}">
+        <input type="hidden" th:field="*{birdId}">
+        <input type="hidden" th:field="*{regionId}">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="inputTitle">Title</label>
+                <input type="text" class="form-control" th:field="*{title}"
+                       id="inputTitle">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputDescription">Description</label>
+                <input type="text" class="form-control"
+                       id="inputDescription" th:field="*{description}">
+            </div>
         </div>
-        <div class="form-group col-md-6">
-            <label for="inputDescription">Description</label>
-            <input type="text" class="form-control"
-                   id="inputDescription" th:field="*{description}">
-        </div>
-        <div class="form-group col-md-6">
-            <label for="inputPicture">Picture</label>
-            <input type="text" class="form-control"
-                   id="inputPicture" th:field="*{picture}">
-        </div>
-    </div>
 
-    <button type="submit" class="btn btn-success pull-right">Enregistrer</button>
+        <button type="submit" class="btn btn-success pull-right">Enregistrer</button>
 
-</form>
+    </form>
+</div>
+
 <!--FOOTER-->
 <footer th:replace="fragments/footer::footer"></footer>
 </body>
